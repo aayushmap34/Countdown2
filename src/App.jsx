@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import GenreSelector from './components/GenreSelector';
+import ToggleButtons from './components/ToggleButtons';
 import BookList from './components/BookList';
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [showFiction, setShowFiction] = useState(true);
+  const [showNonFiction, setShowNonFiction] = useState(true);
+  const [showChildren, setShowChildren] = useState(true);
 
   const bookData = {
     "fiction": [
@@ -28,14 +28,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Book Explorer</h1>
-      <GenreSelector onSelectGenre={setSelectedGenre} />
-      {selectedGenre && (
-        <>
-          <h2>{selectedGenre.toUpperCase()} Books</h2>
-          <BookList books={bookData[selectedGenre]} />
-        </>
-      )}
+      <h1>Online Bookstore</h1>
+      <ToggleButtons 
+        showFiction={showFiction} setShowFiction={setShowFiction}
+        showNonFiction={showNonFiction} setShowNonFiction={setShowNonFiction}
+        showChildren={showChildren} setShowChildren={setShowChildren}
+      />
+      {showFiction && <BookList title="Fiction" books={bookData["fiction"]} />}
+      {showNonFiction && <BookList title="Non-Fiction" books={bookData["non-fiction"]} />}
+      {showChildren && <BookList title="Children" books={bookData["children"]} />}
     </div>
   );
 }
