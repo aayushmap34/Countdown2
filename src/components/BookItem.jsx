@@ -1,17 +1,10 @@
 import BookItem from './BookItem';
 
-function BookList({ books }) {
+function BookList({ title, author, price }) {
   return (
-    <div>
-      {books.map((book, index) => (
-        <BookItem
-          key={index}
-          title={book.title}
-          author={book.author}
-          price={book.price}
-        />
-      ))}
-    </div>
+    <p>
+    <em>{title}</em>, {author}, ${price}
+  </p>
   );
 }
 
