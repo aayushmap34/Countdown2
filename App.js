@@ -26,5 +26,9 @@ function App() {
   useEffect(() => {
     fetchQuestions();
   }, []);
-  
+
+  const handleAnswered = (isCorrect) => {
+    if (isCorrect) setScore(prev => prev + 1);
+    setAnswered(prev => prev + 1);
+  };
 }
