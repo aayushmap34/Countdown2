@@ -31,4 +31,43 @@ function App() {
     if (isCorrect) setScore(prev => prev + 1);
     setAnswered(prev => prev + 1);
   };
+
+  return (
+    <Container maxWidth="md" style={{ marginTop: '2rem' }}>
+      {/* Title */}
+      <Typography variant="h4" gutterBottom><b>Trivia Game</b></Typography>
+
+      {/* Button to generate a new set of questions */}
+      <Button
+        variant="contained"
+        onClick={fetchQuestions}
+        style={{ marginBottom: '1.5rem' }}
+      >
+        Generate New Questions
+      </Button>
+
+      {/* Show loading spinner while questions are being fetched */}
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          {/* Display each question using the QuestionCard component */}
+          {questions.map((q, idx) => (
+            <QuestionCard
+              key={idx}
+              question={q}
+              onAnswered={handleAnswered}
+            />
+          ))}
+
+          {/* Show current score once questions are displayed */}
+          <Typography variant="h6" style={{ marginTop: '1.5rem' }}>
+            Score: {score} / {questions.length}
+          </Typography>
+        </>
+      )}
+    </Container>
+  );
 }
+
+export default App;
